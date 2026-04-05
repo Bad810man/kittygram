@@ -84,9 +84,14 @@ jobs:
           target: "kittygram"
 
       - name: Copy .env file to target machine
-        run: |
-          cd kittygram
-          echo "${{ secrets.ENV_FILE }}" > .env
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd kittygram
+            echo "${{ secrets.ENV_FILE }}" > .env
 
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
