@@ -83,8 +83,8 @@ jobs:
           source: "docker-compose.production.yml"
           target: "kittygram"
 
-      - name: Cope .env file to target machine
-        run: echo "${{ secrets.ENV_FILE }}" > kittygram/.env
+      - name: Copy .env file to target machine
+        run: echo "${{ secrets.ENV_FILE }}" > .env
 
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
@@ -92,7 +92,8 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          script: cd kittygram
+          run: |
+            cd kittygram
             sudo docker-compose -f docker-compose.production.yml pull
             sudo docker-compose -f docker-compose.production.yml down
             sudo docker-compose -f docker-compose.production.yml up -d
