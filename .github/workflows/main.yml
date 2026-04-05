@@ -82,9 +82,11 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: "docker-compose.production.yml"
           target: "kittygram"
+
+      - name: Cope .env file to target machine
+        run: echo "${{ secrets.ENV_FILE }}" > kittygram/.env
 
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
@@ -92,11 +94,8 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: cd kittygram
-            sudo docker compose -f docker-compose.production.yml pull
-            sudo docker compose -f docker-compose.production.yml down
-            sudo docker compose -f docker-compose.production.yml up -d
-            sudo docker compose -f docker-compose.production.yml exec backend python ...
-            sudo docker compose -f docker-compose.production.yml exec backend python ...
-            sudo docker compose -f docker-compose.production.yml exec backend cp -r
+            sudo docker-compose -f docker-compose.production.yml pull
+            sudo docker-compose -f docker-compose.production.yml down
+            sudo docker-compose -f docker-compose.production.yml up -d
+            sudo docker-compose -f docker-compose.production.yml exec backend cp -r
