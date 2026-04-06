@@ -10,4 +10,4 @@ python manage.py migrate
 
 # Start server
 echo "Starting server"
-gunicorn -b 0.0.0.0:8080 kittygram_backend.wsgi:cats
+gunicorn -b 0.0.0.0:9001 -w 2 kittygram_backend.wsgi:cats
