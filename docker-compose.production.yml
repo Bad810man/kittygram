@@ -28,8 +28,8 @@ services:
     env_file:
       - .env
     volumes:
-      - ./backend/static:/app/static
-      - ./backend/media:/app/media
+      - static:/app/static
+      - media:/app/media
     depends_on:
       postgres:
         condition: service_healthy
@@ -63,8 +63,8 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./backend/static:/static:ro
-      - ./backend/media:/media:ro
+      - static:/static:ro
+      - media:/media:ro
     networks:
       - kitty-net
 
