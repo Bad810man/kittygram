@@ -4,8 +4,8 @@ WORKDIR /app
 COPY . .
 RUN python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
+RUN pip install gunicorn
 RUN chmod +x ./docker-entrypoint.sh
-RUN apt update && apt install gunicorn -y
 
 EXPOSE 9001
 ENTRYPOINT [ "./docker-entrypoint.sh" ]
