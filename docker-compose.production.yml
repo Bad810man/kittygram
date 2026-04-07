@@ -64,7 +64,7 @@ services:
       - "8080:80"
     volumes:
       - static:/static:ro
-      - media:/media:ro
+      - media:/app/media:ro
     networks:
       - kitty-net
 
