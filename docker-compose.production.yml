@@ -43,8 +43,8 @@ services:
     image: ${DOCKER_USER}/kittygram_frontend:latest
     container_name: frontend
     restart: always
-    volumes:
-      - static:/app/build
+    # volumes:
+    #   - static:/app/build
     depends_on:
       - backend
     networks:
