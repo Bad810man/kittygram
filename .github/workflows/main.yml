@@ -102,8 +102,9 @@ jobs:
           script: |
             cd kittygram
             sudo docker compose -f docker-compose.production.yml pull
-            sudo docker compose -f docker-compose.production.yml down
-            sudo docker compose -f docker-compose.production.yml up -d
+            sudo docker compose -f docker-compose.production.yml up -d --remove-orphans
+            sudo docker system prune -f
+            sudo docker image prune -f
 
   auto_tests:
     runs-on: ubuntu-latest
