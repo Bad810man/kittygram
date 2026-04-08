@@ -6,8 +6,12 @@ COPY package-lock.json package-lock.json
 
 RUN npm ci
 
-COPY . .
-RUN npm run build
-RUN npm install --global http-server
+# COPY . .
+# RUN npm run build
+# RUN npm install --global http-server
 
-CMD ["http-server", "/app/build", "-p", "8000", "--spa"]
+# CMD ["http-server", "/app/build", "-p", "8000", "--spa"]
+
+RUN npm install --global serve
+
+CMD ["serve", "-s", "build", "-l", "8000"]
