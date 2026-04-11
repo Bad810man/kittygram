@@ -26,8 +26,8 @@ RUN npm ci
 
 COPY . .
 RUN npm run build
-RUN mv ./build/static/* ./build/
-RUN rmdir ./build/static
+RUN cp -r ./build/static/. /static/ && cp -r ./build/. /static/
+
 
 # RUN npm install --global http-server
 
