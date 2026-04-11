@@ -42,7 +42,7 @@ services:
     # dockerfile: ./Dockerfile
     image: ${DOCKER_USER}/kittygram_frontend:latest
     container_name: frontend
-    restart: no
+    restart: "no"
     volumes:
       - static:/app/build/
     # depends_on:
