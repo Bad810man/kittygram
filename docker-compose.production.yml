@@ -38,22 +38,22 @@ services:
 
   frontend:
     # build:
-    #   context: ./frontend
-    #   dockerfile: ./Dockerfile
+    # context: ./frontend
+    # dockerfile: ./Dockerfile
     image: ${DOCKER_USER}/kittygram_frontend:latest
     container_name: frontend
-    restart: always
-    # volumes:
-    #   - static:/app/build/
-    depends_on:
-      - backend
+    restart: no
+    volumes:
+      - static:/app/build/
+    # depends_on:
+    #   - backend
     networks:
       - kitty-net
 
   nginx:
     # build:
     #   context: ./nginx
-    #   dockerfile: ./Dockerfile
+    # dockerfile: ./Dockerfile
     image: ${DOCKER_USER}/kittygram_gateway:latest
     container_name: gateway
     restart: always
