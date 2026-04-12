@@ -26,9 +26,9 @@ RUN npm ci
 
 COPY . .
 RUN npm run build
-RUN cp -r ./build/static/. /static/ && cp -r ./build/. /static/
+# RUN cp -r ./build/static/. /static/ && cp -r ./build/. /static/
 
 
-# RUN npm install --global http-server
+RUN npm install --global http-server
 
-# CMD ["http-server-spa", "./build", "index.html", "8000"]
+CMD ["http-server", "./build", "-p", "8000"]

@@ -18,6 +18,22 @@ services:
       retries: 5
       start_period: 15s
 
+  frontend:
+    # build:
+    # context: ./frontend
+    # dockerfile: ./Dockerfile
+    image: ${DOCKER_USER}/kittygram_frontend:latest
+    container_name: frontend
+    restart: "no"
+    volumes:
+      - static:/app/static/
+    command: >
+      sh -c "mkdir -p /app/static/frontend && cp -r /app/build* /app/static/frontend/"
+    # depends_on:
+    #   - backend
+    networks:
+      - kitty-net
+
   backend:
     # build:
     #   context: ./backend
@@ -33,20 +49,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    networks:
-      - kitty-net
-
-  frontend:
-    # build:
-    # context: ./frontend
-    # dockerfile: ./Dockerfile
-    image: ${DOCKER_USER}/kittygram_frontend:latest
-    container_name: frontend
-    restart: "no"
-    volumes:
-      - static:/static/
-    # depends_on:
-    #   - backend
+      frontned:
+        condition: service_completed_successfully
     networks:
       - kitty-net
 
