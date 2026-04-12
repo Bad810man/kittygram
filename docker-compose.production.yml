@@ -28,7 +28,7 @@ services:
     volumes:
       - static:/app/static/
     command: >
-      sh -c "mkdir -p /app/static/frontend && cp -r /app/build* /app/static/frontend/"
+      sh -c "mkdir -p /app/static/frontend && cp -r /app/build/* /app/static/frontend/"
     # depends_on:
     #   - backend
     networks:
