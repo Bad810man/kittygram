@@ -49,7 +49,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      frontned:
+      frontend:
         condition: service_completed_successfully
     networks:
       - kitty-net
