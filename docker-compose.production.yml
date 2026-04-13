@@ -26,9 +26,9 @@ services:
     container_name: frontend
     restart: "no"
     volumes:
-      - static:/app/static/
+      - static:/app/build/
     command: >
-      sh -c "mkdir -p /app/static/frontend && cp -r /app/build/* /app/static/frontend/"
+      sh -c "cp -r /app/build/static/. /app/build/"
     # depends_on:
     #   - backend
     networks:
